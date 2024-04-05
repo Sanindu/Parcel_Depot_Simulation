@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/group05/DatasetParacel.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/DatasetParacel.txt</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
