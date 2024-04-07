@@ -79,4 +79,50 @@ public class Parcel {
     public void setDestination(String destination) {
         this.destination = destination;
     }
+    
+    public int parcelFee(double length, double width, double weight, int noOfDays, int discounts) {
+    	int totalFee;
+    	int dimentionFare;
+    	int StorageDurationFee;
+    	String parcelType;
+    	
+
+    	if (weight ==0 || length == 0 || width == 0 ) {
+    		System.out.println("Invalid Dimension");
+    		return -1;
+    	}
+    	else if (weight <= Constants.SMALL_WEIGHT_LIMIT && length <= Constants.SMALL_MAX_LENGTH 
+    			 && width<= Constants.SMALL_MAX_WIDTH) {
+    		parcelType = "SMALL";
+    		dimentionFare = Constants.SMALL_FARE;
+    		System.out.println("Small Parcel");
+    	}
+    	else if (weight <= Constants.MEDIUM_WEIGHT_LIMIT && length <= Constants.MEDIUM_MAX_LENGTH 
+   			 && width<= Constants.MEDIUM_MAX_WIDTH) {
+    		parcelType = "MEDIUM";
+    		dimentionFare = Constants.MEDIUM_FARE;
+    		System.out.println("Medium Parcel");
+    	}
+    	//No Width limitation for Large Parcels
+    	else if (weight <= Constants.LARGE_WEIGHT_LIMIT && length <= Constants.LARGE_MAX_LENGTH) {
+    		parcelType = "LARGE";
+    		dimentionFare = Constants.LARGE_FARE;
+    		System.out.println("Large Parcel");
+    	}
+    	else {
+    		System.out.println("Sorry! Out of Range Parcel Dimension");
+    		return -1;
+    	}
+
+    	// Fee Calculation for Number of Days in the Deport
+    	if(noOfDays == 2) {
+    		StorageDurationFee = 0;
+    	}
+        else StorageDurationFee = Constants.PER_DAY_RATE*noOfDays;
+    		
+    	totalFee = Constants.BASE_FARE + dimentionFare + StorageDurationFee - discounts;
+    	
+    	return totalFee;
+    	
+    }
 }
