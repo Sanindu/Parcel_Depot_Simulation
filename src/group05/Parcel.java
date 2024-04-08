@@ -83,25 +83,23 @@ public class Parcel {
     public double parcelFee(int length, int width, int height, int weight, int noOfDays) {
         double totalFee;
         double dimensionFare;
-        double StorageDurationFee;
+        double storageDurationFee;
         double discounts;
         String parcelType;
         int dimensionalWeight;
 
         dimensionalWeight = dimensionWeight(length, width, height);
         // Selects the greater of the two weights (actual weight or dimensional weight) as the chargeable weight
-        if (dimensionalWeight != 0 && dimensionalWeight > weight) {
+        if (dimensionalWeight != -1 && dimensionalWeight > weight) {
             weight = dimensionalWeight;
         }
         if (weight <= Constants.SMALL_WEIGHT_LIMIT) {
             parcelType = "SMALL";
             dimensionFare = Constants.SMALL_FARE;
-        }
-        else if (weight <= Constants.MEDIUM_WEIGHT_LIMIT) {
+        } else if (weight <= Constants.MEDIUM_WEIGHT_LIMIT) {
             parcelType = "MEDIUM";
             dimensionFare = Constants.MEDIUM_FARE;
-        }
-        else if (weight <= Constants.LARGE_WEIGHT_LIMIT) {
+        } else if (weight <= Constants.LARGE_WEIGHT_LIMIT) {
             parcelType = "LARGE";
             dimensionFare = Constants.LARGE_FARE;
         } else {
@@ -111,10 +109,10 @@ public class Parcel {
 
         // Fee Calculation for Number of Days in the Deport
         if (noOfDays == 2) {
-            StorageDurationFee = 0;
-        } else StorageDurationFee = Constants.PER_DAY_RATE * noOfDays;
+            storageDurationFee = 0;
+        } else storageDurationFee = Constants.PER_DAY_RATE * noOfDays;
         discounts = discount(parcelType, dimensionFare);
-        totalFee = Constants.BASE_FARE + dimensionFare + StorageDurationFee - discounts;
+        totalFee = Constants.BASE_FARE + dimensionFare + storageDurationFee - discounts;
         System.out.println("Parcel Type : " + parcelType);
         String formattedFee = String.format("%.2f", totalFee);
         System.out.println("Parcel Total Fee : GBP " + formattedFee);
@@ -138,8 +136,8 @@ public class Parcel {
             dimensionalWeight = (length * width * height) / (1000000 * Constants.VOLUMETRIC_FACTOR);
             return (int) dimensionalWeight;
         } catch (ArithmeticException e) {
-            System.out.println("Error: " + e);
-            return 0;
+            System.out.println("Error in dimensionWeight: " + e);
+            return -1;
         }
     }
 }
