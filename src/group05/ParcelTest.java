@@ -3,19 +3,15 @@
  */
 package group05;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 
  */
 class ParcelTest {
-    
+
 //	/**
 //	 * @throws java.lang.Exception
 //	 */
@@ -47,15 +43,33 @@ class ParcelTest {
 //	/**
 //	 * Test method for {@link group05.Parcel#parcelFee(double, double, double, int, int)}.
 //	 */
+@Test
+public void testParcelFee() {
+	// Create a Parcel object
+	Parcel parcel = new Parcel("C01", 65, 50, 35, 3, 21);
+	// Call the parcelFee method and check the returned value
+	double fee = parcel.parcelFee(parcel.getLength(), parcel.getWidth(), parcel.getHeight(), parcel.getWeight(), parcel.getNoOfDays());
+	// Assert the expected fee
+	assertEquals(28.6, fee, 0.001);
+}
+
 //	@Test
-//	void testParcelFee() {
-//		fail("Not yet implemented");
+//	public void testDimensionWeight() {
+//		// Create a Parcel object
+//		Parcel parcel = new Parcel();
+//		// Call the dimensionWeight method and check the returned value
+//		int weight = parcel.dimensionWeight(10, 20, 30);
+//		// Assert the expected weight
+//		assertEquals(6, weight);
 //	}
-//    @Test
-//    void discount() {
-//    }
 //
-//    @Test
-//    void dimensionWeight() {
-//    }
+//	@Test
+//	public void testDiscount() {
+//		// Create a Parcel object
+//		Parcel parcel = new Parcel();
+//		// Call the discount method and check the returned value
+//		double discount = parcel.discount("LARGE", 50.0);
+//		// Assert the expected discount
+//		assertEquals(5.0, discount, 0.001); // Adjust delta as per your requirements
+//	}
 }
