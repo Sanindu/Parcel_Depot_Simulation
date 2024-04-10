@@ -1,19 +1,17 @@
-package group05;
-
 public class Parcel {
 
-    private String id; 
-    private double length;
-    private double width;
-    private double height;
+    private String id;
+    private int length;
+    private int width;
+    private int height;
     private int noOfDays;
-    private double weight;
-    private String destination;
-
+    private double weight; 
+    private String destination; 
+    
     public Parcel() {
     }
 
-    public Parcel(String id, double length, double width, double height, int noOfDays, double weight, String destination) {
+    public Parcel(String id, int length, int width, int height, int noOfDays, double weight, String destination) {
         this.id = id;
         this.length = length;
         this.width = width;
@@ -32,27 +30,27 @@ public class Parcel {
         this.id = id;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
