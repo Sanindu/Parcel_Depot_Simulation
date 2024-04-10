@@ -3,24 +3,24 @@ package group05;
 public class Parcel {
 
     private String id;
-    private double length;
-    private double width;
-    private double height;
+    private int length;
+    private int width;
+    private int height;
     private int noOfDays;
-    private double weight;
-    private String destination;
+    private int weight;
+   // private String destination;
 
     public Parcel() {
     }
 
-    public Parcel(String id, double length, double width, double height, int noOfDays, double weight, String destination) {
+    public Parcel(String id, int length, int width, int height, int noOfDays, int weight /*, String destination*/) {
         this.id = id;
         this.length = length;
         this.width = width;
         this.height = height;
         this.noOfDays = noOfDays;
         this.weight = weight;
-        this.destination = destination;
+      //  this.destination = destination;
     }
 
     // Getters and setters
@@ -32,27 +32,27 @@ public class Parcel {
         this.id = id;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 
-    public void setLength(double length) {
+    public void setLength(int length) {
         this.length = length;
     }
 
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -64,21 +64,21 @@ public class Parcel {
         this.noOfDays = noOfDays;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public String getDestination() {
-        return destination;
-    }
+//    public String getDestination() {
+//        return destination;
+//    }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+//    public void setDestination(String destination) {
+//        this.destination = destination;
+//    }
 
     public double parcelFee(int length, int width, int height, int weight, int noOfDays) {
         double totalFee;
@@ -106,9 +106,8 @@ public class Parcel {
             System.out.println("Sorry! Out of Range Parcel Dimension");
             return -1;
         }
-
         // Fee Calculation for Number of Days in the Deport
-        if (noOfDays == 2) {
+        if (noOfDays <= 2) {
             storageDurationFee = 0;
         } else storageDurationFee = Constants.PER_DAY_RATE * noOfDays;
         discounts = discount(parcelType, dimensionFare);
@@ -133,7 +132,7 @@ public class Parcel {
         //Calculate Dimensional Weight: Divide the volume in cubic meters by the carrier's volumetric factor.
         // The result is the dimensional weight of the package in kilograms (kg).
         try {
-            dimensionalWeight = (length * width * height) / (1000000 * Constants.VOLUMETRIC_FACTOR);
+            dimensionalWeight = (length * width * height) / Constants.VOLUMETRIC_FACTOR;
             return (int) dimensionalWeight;
         } catch (ArithmeticException e) {
             System.out.println("Error in dimensionWeight: " + e);
