@@ -5,20 +5,20 @@ public class Parcel {
     private int width;
     private int height;
     private int noOfDays;
-    private double weight; 
-    private String destination; 
-    
+    private double weight;
+
+    // Empty constructor
     public Parcel() {
     }
 
-    public Parcel(String id, int length, int width, int height, int noOfDays, double weight, String destination) {
+    // Filled constructor with all data
+    public Parcel(String id, int length, int width, int height, int noOfDays, double weight) {
         this.id = id;
         this.length = length;
         this.width = width;
         this.height = height;
         this.noOfDays = noOfDays;
         this.weight = weight;
-        this.destination = destination;
     }
 
     // Getters and setters
@@ -68,13 +68,5 @@ public class Parcel {
 
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
     }
 }
