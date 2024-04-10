@@ -1,3 +1,4 @@
+package group05;
 public class Parcel {
 
     private String id;
