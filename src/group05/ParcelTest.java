@@ -12,37 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ParcelTest {
 
-//	/**
-//	 * @throws java.lang.Exception
-//	 */
-//	@BeforeAll
-//	static void setUpBeforeClass() throws Exception {
-//	}
-//
-//	/**
-//	 * @throws java.lang.Exception
-//	 */
-//	@AfterAll
-//	static void tearDownAfterClass() throws Exception {
-//	}
-//
-//	/**
-//	 * @throws java.lang.Exception
-//	 */
-//	@BeforeEach
-//	void setUp() throws Exception {
-//	}
-//
-//	/**
-//	 * @throws java.lang.Exception
-//	 */
-//	@AfterEach
-//	void tearDown() throws Exception {
-//	}
-//
-//	/**
-//	 * Test method for {@link group05.Parcel#parcelFee(double, double, double, int, int)}.
-//	 */
 @Test
 public void testParcelFee() {
 	// Create a Parcel object
@@ -52,24 +21,57 @@ public void testParcelFee() {
 	// Assert the expected fee
 	assertEquals(28.6, fee, 0.001);
 }
+//For Small Parcel and Correct Fee
+	@Test
+	void small_CorrectFee() {
+		Parcel parcel = new Parcel();
+		double expectedFee = Constants.BASE_FARE + Constants.SMALL_FARE;
+		double actualFee = parcel.parcelFee(10, 10, 10, 1, 1);
+		assertEquals(expectedFee, actualFee);
+	}
+	//For Medium Parcel and Correct Fee
+	@Test
+	void medium_CorrectFee() {
+		Parcel parcel = new Parcel();
+		double expectedFee = Constants.BASE_FARE + Constants.MEDIUM_FARE;
+		double actualFee = parcel.parcelFee(30, 30, 30, 5, 1);
+		assertEquals(expectedFee, actualFee);
+	}
+	//For Large Parcel and Correct Fee
+	@Test
+	void Large_CorrectFee() {
+		Parcel parcel = new Parcel();
+		double actualFee = parcel.parcelFee(50, 50, 50, 21, 2);
+		assertEquals(22.6, actualFee);
+	}
 
-//	@Test
-//	public void testDimensionWeight() {
-//		// Create a Parcel object
-//		Parcel parcel = new Parcel();
-//		// Call the dimensionWeight method and check the returned value
-//		int weight = parcel.dimensionWeight(10, 20, 30);
-//		// Assert the expected weight
-//		assertEquals(6, weight);
-//	}
-//
-//	@Test
-//	public void testDiscount() {
-//		// Create a Parcel object
-//		Parcel parcel = new Parcel();
-//		// Call the discount method and check the returned value
-//		double discount = parcel.discount("LARGE", 50.0);
-//		// Assert the expected discount
-//		assertEquals(5.0, discount, 0.001); // Adjust delta as per your requirements
-//	}
+	@Test
+	void OutOfRangeParcel_ReturnsNegativeOne() {
+		Parcel parcel = new Parcel();
+		double actualFee = parcel.parcelFee(200, 200, 200, 50, 1);
+		assertEquals(-1, actualFee);
+	}
+
+	@Test
+	void discount_LargeParcel_CorrectDiscount() {
+		Parcel parcel = new Parcel();
+		double expectedDiscount = Constants.DISCOUNT_RATE * Constants.LARGE_FARE;
+		double actualDiscount = parcel.discount("LARGE", Constants.LARGE_FARE);
+		assertEquals(expectedDiscount, actualDiscount);
+	}
+
+	@Test
+	void discount_SmallParcel_NoDiscount() {
+		Parcel parcel = new Parcel();
+		double actualDiscount = parcel.discount("SMALL", Constants.SMALL_FARE);
+		assertEquals(0, actualDiscount);
+	}
+
+	@Test
+	void test_dimensionWeight() {
+		Parcel parcel = new Parcel();
+		int expectedWeight = 25;
+		int actualWeight = parcel.dimensionWeight(50, 50, 50);
+		assertEquals(expectedWeight, actualWeight);
+	}
 }
