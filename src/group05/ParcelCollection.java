@@ -50,8 +50,10 @@ public class ParcelCollection {
 	    }
 	    
 	    public static void main (String[] args) {
-	    	ParcelCollection pc = new ParcelCollection();
-	    	pc.getParcelCount();
+//	    	ParcelCollection pc = new ParcelCollection();
+//	    	pc.getParcelCount();
+			Parcel pc = new Parcel();
+			pc.parcelFee(65,50,35,21,3);
 	    	
 	    }
 	    
