@@ -1,6 +1,11 @@
 package group05;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ParcelCollection {
@@ -48,16 +53,44 @@ public class ParcelCollection {
 	    public void clearParcels() {
 	        parcels.clear();
 	    }
-	    
-	    public static void main (String[] args) {
-//	    	ParcelCollection pc = new ParcelCollection();
-//	    	pc.getParcelCount();
-			Parcel pc = new Parcel();
-			pc.parcelFee(65,50,35,21,3);
-	    	
-	    }
-	    
-	 }
+
+	public static void main (String[] args) {
+		ParcelCollection pc = new ParcelCollection();
+		List<String[]> data = readParcelFromFile("ParcelData.txt");
+		System.out.println("Number of line in the file "+data.size());
+		for(String[] parcel : data) {
+			pc.addParcel(arrayToParcel(parcel));
+		}
+		System.out.println(String.format("Number of Parcels %s", pc.getParcelCount()));
+		System.out.println(String.format("Get Parcel %s", pc.getParcel("C02")));
+	}
+
+	public static List<String[]> readParcelFromFile(String filePath) {
+		try {
+			return Files.readAllLines(Paths.get(filePath))
+					.stream()
+					.map(line ->
+					{
+						return line.split("\t", -1); // split each line by tab
+					})
+					.skip(1l) // i want to skip the text file header
+					.toList();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
+
+	public static Parcel arrayToParcel(String[] data) {
+		if(data == null || data.length == 0) {
+			return null;
+		}
+
+		return new Parcel(data[0], Integer.parseInt(data[5]), Integer.parseInt(data[2]), Integer.parseInt(data[4]), Integer.parseInt(data[1]), Integer.parseInt(data[3]));
+	}
+
+
+ }
 
 
 
