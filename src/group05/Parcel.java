@@ -139,4 +139,16 @@ public class Parcel {
             return -1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Parcel{" +
+                "id='" + id + '\'' +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", noOfDays=" + noOfDays +
+                ", weight=" + weight +
+                '}';
+    }
 }
