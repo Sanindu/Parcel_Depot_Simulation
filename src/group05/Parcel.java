@@ -8,21 +8,21 @@ public class Parcel {
     private int height;
     private int noOfDays;
     private int weight;
-   // private String destination;
-
-    public Parcel() {
+    private int weight; 
+   
+  public Parcel() {
     }
 
-    public Parcel(String id, int length, int width, int height, int noOfDays, int weight /*, String destination*/) {
+    public Parcel(String id, int length, int width, int height, int noOfDays, int weight) { 
+
         this.id = id;
         this.length = length;
         this.width = width;
         this.height = height;
         this.noOfDays = noOfDays;
         this.weight = weight;
-      //  this.destination = destination;
     }
-
+  
     // Getters and setters
     public String getId() {
         return id;
@@ -71,14 +71,6 @@ public class Parcel {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
-//    public String getDestination() {
-//        return destination;
-//    }
-
-//    public void setDestination(String destination) {
-//        this.destination = destination;
-//    }
 
     public double parcelFee(int length, int width, int height, int weight, int noOfDays) {
         double totalFee;
@@ -152,3 +144,5 @@ public class Parcel {
                 '}';
     }
 }
+}
+
