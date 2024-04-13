@@ -1,4 +1,5 @@
 package group05;
+
 public class Parcel {
 
     private String id;
@@ -6,14 +7,14 @@ public class Parcel {
     private int width;
     private int height;
     private int noOfDays;
-    private double weight;
+    private int weight; // Changed to int
 
     // Empty constructor
     public Parcel() {
     }
 
     // Filled constructor with all data
-    public Parcel(String id, int length, int width, int height, int noOfDays, double weight) {
+    public Parcel(String id, int length, int width, int height, int noOfDays, int weight) { // Changed to int
         this.id = id;
         this.length = length;
         this.width = width;
@@ -63,11 +64,11 @@ public class Parcel {
         this.noOfDays = noOfDays;
     }
 
-    public double getWeight() {
+    public int getWeight() { // Changed return type to int
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) { // Changed parameter type to int
         this.weight = weight;
     }
 }
