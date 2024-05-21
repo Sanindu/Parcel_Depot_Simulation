@@ -1,4 +1,6 @@
-package group05;
+package application;
+
+import application.Constants;
 
 public class Parcel {
 
@@ -8,21 +10,20 @@ public class Parcel {
     private int height;
     private int noOfDays;
     private int weight;
-   // private String destination;
 
-    public Parcel() {
+  public Parcel() {
     }
 
-    public Parcel(String id, int length, int width, int height, int noOfDays, int weight /*, String destination*/) {
+    public Parcel(String id, int length, int width, int height, int noOfDays, int weight) { 
+
         this.id = id;
         this.length = length;
         this.width = width;
         this.height = height;
         this.noOfDays = noOfDays;
         this.weight = weight;
-      //  this.destination = destination;
     }
-
+  
     // Getters and setters
     public String getId() {
         return id;
@@ -72,49 +73,29 @@ public class Parcel {
         this.weight = weight;
     }
 
-//    public String getDestination() {
-//        return destination;
-//    }
-
-//    public void setDestination(String destination) {
-//        this.destination = destination;
-//    }
-
     public double parcelFee(int length, int width, int height, int weight, int noOfDays) {
         double totalFee;
         double dimensionFare;
         double storageDurationFee;
         double discounts;
         String parcelType;
-        int dimensionalWeight;
-
-        dimensionalWeight = dimensionWeight(length, width, height);
+        
         // Selects the greater of the two weights (actual weight or dimensional weight) as the chargeable weight
-        if (dimensionalWeight != -1 && dimensionalWeight > weight) {
-            weight = dimensionalWeight;
-        }
-        if (weight <= Constants.SMALL_WEIGHT_LIMIT) {
-            parcelType = "SMALL";
-            dimensionFare = Constants.SMALL_FARE;
-        } else if (weight <= Constants.MEDIUM_WEIGHT_LIMIT) {
-            parcelType = "MEDIUM";
-            dimensionFare = Constants.MEDIUM_FARE;
-        } else if (weight <= Constants.LARGE_WEIGHT_LIMIT) {
-            parcelType = "LARGE";
-            dimensionFare = Constants.LARGE_FARE;
-        } else {
-            System.out.println("Sorry! Out of Range Parcel Dimension");
-            return -1;
-        }
+        weight = chargeableWeight(length, width, height, weight);
+        
+        parcelType = parcelType(weight);
+        dimensionFare = dimensionFareCal(parcelType);
+        
         // Fee Calculation for Number of Days in the Deport
         if (noOfDays <= 2) {
             storageDurationFee = 0;
         } else storageDurationFee = Constants.PER_DAY_RATE * noOfDays;
+        
         discounts = discount(parcelType, dimensionFare);
-        totalFee = Constants.BASE_FARE + dimensionFare + storageDurationFee - discounts;
-        System.out.println("Parcel Type : " + parcelType);
+        
+        totalFee = Constants.BASE_FARE + dimensionFare + storageDurationFee - discounts;    
         String formattedFee = String.format("%.2f", totalFee);
-        System.out.println("Parcel Total Fee : GBP " + formattedFee);
+      //  System.out.println("Parcel Total Fee : GBP " + formattedFee);
         return totalFee;
     }
 
@@ -126,7 +107,47 @@ public class Parcel {
         } else discount = 0.0;
         return discount;
     }
+    
+    public double dimensionFareCal(String parcelType) {
+    	double dimensionFare;
+        if (parcelType.equals("SMALL")) {
+            dimensionFare = Constants.SMALL_FARE;
+        } else if (parcelType.equals("MEDIUM")) {
+            dimensionFare = Constants.MEDIUM_FARE;
+        } else if (parcelType.equals("LARGE")) {
+            dimensionFare = Constants.LARGE_FARE;
+        } else {
+        	dimensionFare = 0.0;      
+            System.out.println("Sorry! Out of Range Parcel Dimension");
+        }
+    	return dimensionFare;
+    }
 
+    public String parcelType(int weight) {
+       
+        if (weight <= Constants.SMALL_WEIGHT_LIMIT) {
+            return "SMALL";
+            
+        } else if (weight <= Constants.MEDIUM_WEIGHT_LIMIT) {
+        	return "MEDIUM";
+            
+        } else if (weight <= Constants.LARGE_WEIGHT_LIMIT) {
+          return "LARGE";
+            
+        } else {
+            return "OUT OF RANGE DIMENSION";
+        } 	
+    }
+    
+ // Selects the greater of the two weights (actual weight or dimensional weight) as the chargeable weight
+    public int chargeableWeight(int length, int width,int height, int weight) {
+    	int dimensionalWeight = dimensionWeight(length, width, height);
+        if (dimensionalWeight != -1 && dimensionalWeight > weight) {
+            weight = dimensionalWeight;
+        }
+        return weight;
+    }
+    
     public int dimensionWeight(int length, int width, int height) {
         double dimensionalWeight;
         //Calculate Dimensional Weight: Divide the volume in cubic meters by the carrier's volumetric factor.
@@ -138,5 +159,17 @@ public class Parcel {
             System.out.println("Error in dimensionWeight: " + e);
             return -1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Parcel{" +
+                "id='" + id + '\'' +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", noOfDays=" + noOfDays +
+                ", weight=" + weight +
+                '}';
     }
 }
