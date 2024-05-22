@@ -1,6 +1,4 @@
-package application;
-
-import application.Constants;
+package group05;
 
 public class Parcel {
 
