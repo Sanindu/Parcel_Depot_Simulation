@@ -216,5 +216,34 @@ public class ParcelCollection {
         } catch (IOException e) {
             System.out.println("Error writing to customer data file: " + e.getMessage());
         }
+     // Synchronized method for thread safety when writing to the file
+        public synchronized void rewriteParcelDataFile(String filePath) { 
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                // Write the header
+                writer.write("PId\tnDay\tweight\tlength\twidth\theight"); 
+                writer.newLine();
+
+                // Write the data for each remaining parcel
+                for (Parcel parcel : parcels.values()) {
+                    String line = parcel.getId() + "\t" +
+                                  parcel.getNoOfDays() + "\t" +
+                                  parcel.getWeight() + "\t" +
+                                  parcel.getLength() + "\t" +
+                                  parcel.getWidth() + "\t" +
+                                  parcel.getHeight();
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.err.println("Error writing to ParcelData.txt: " + e.getMessage());
+            }
+        }
+
+        // Synchronized method for thread safety when removing parcels
+        public synchronized void removeParcell(String id) { 
+            if (parcels.remove(id) != null) {  // Check if removal was successful
+                rewriteParcelDataFile("ParcelData.txt"); // Rewrite the file after removing a parcel
+            }
+        }
     }
 }

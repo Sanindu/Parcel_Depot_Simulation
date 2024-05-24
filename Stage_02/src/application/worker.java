@@ -59,6 +59,9 @@ public class worker extends Thread {
 
                     totalEarning += fee;
                     totalParcelProceed++;
+                    
+                    // Remove parcel from the collection 
+                    parcelCollection.removeParcel(parcelId);
 
                 
 

@@ -3,10 +3,10 @@ package group05;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class OverallFunctionalityTest {
+class OverallTesting {
 
     @Test
-    public void testParcelFunctionality() {
+    void testParcelFunctionality() {
         Parcel parcel = new Parcel("C01", 65, 50, 35, 3, 21);
         double fee = parcel.parcelFee(parcel.getLength(), parcel.getWidth(), parcel.getHeight(), parcel.getWeight(), parcel.getNoOfDays());
         assertEquals(28.6, fee, 0.001);
@@ -16,9 +16,8 @@ class OverallFunctionalityTest {
         double actualFee = parcelInstance.parcelFee(10, 10, 10, 1, 1);
         assertEquals(expectedFee, actualFee);
 
-        expectedFee = Constants.BASE_FARE + Constants.MEDIUM_FARE;
         actualFee = parcelInstance.parcelFee(30, 30, 30, 5, 1);
-        assertEquals(expectedFee, actualFee);
+        assertEquals(Constants.BASE_FARE + Constants.MEDIUM_FARE, actualFee);
 
         actualFee = parcelInstance.parcelFee(50, 50, 50, 21, 2);
         assertEquals(22.6, actualFee);
@@ -80,3 +79,4 @@ class OverallFunctionalityTest {
         assertTrue(pc.isEmpty());
     }
 }
+
