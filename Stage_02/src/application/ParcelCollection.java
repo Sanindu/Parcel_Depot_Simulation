@@ -164,9 +164,7 @@ public class ParcelCollection {
             return Collections.emptyList();
         }
     }
-<<<<<<< Updated upstream
-}
-=======
+
 
     public void start() {
         System.out.println("Parcel collection process started.");
@@ -226,4 +224,3 @@ public class ParcelCollection {
 
    
 }
->>>>>>> Stashed changes

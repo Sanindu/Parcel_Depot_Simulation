@@ -3,7 +3,7 @@ package application;
 import java.util.concurrent.BlockingQueue;
 import java.util.Random;
 
-public class Worker extends Thread {
+public class worker extends Thread {
 
     private BlockingQueue<String[]> customerQueue;
     private ParcelCollection parcelCollection;
@@ -13,7 +13,7 @@ public class Worker extends Thread {
     private int processingSpeed = 500; // Default processing time in milliseconds
     private Random random = new Random();
 
-    public Worker(int workerId, BlockingQueue<String[]> customerQueue, ParcelCollection parcelCollection) {
+    public worker(int workerId, BlockingQueue<String[]> customerQueue, ParcelCollection parcelCollection) {
         this.workerId = workerId;
         this.customerQueue = customerQueue;
         this.parcelCollection = parcelCollection;
