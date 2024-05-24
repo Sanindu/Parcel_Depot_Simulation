@@ -1,10 +1,30 @@
 package application;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.List;
 
-public class Main {
+public class Main extends Application {
+	@Override
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("CSYM026 - Group 05");
+            primaryStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+ 
 
     public static void main(String[] args) {
         // Create the shared data structures
@@ -35,10 +55,16 @@ public class Main {
         // Add customers to the queue 
         List<String[]> customerData = parcelCollection.readCustomerDataFromFile("CustomerData.txt");
         for (String[] customer : customerData) {
+<<<<<<< Updated upstream
             customerQueue.add(customer);
         }
 
         // You might want to add a way to gracefully stop the worker threads here.
         // (For example, using Thread.interrupt() after a certain condition is met)
+=======
+            customerQueue.add(customer); 
+        }  
+        launch(args);
+>>>>>>> Stashed changes
     }
 }
