@@ -1,9 +1,13 @@
 package application;
 
 import java.util.concurrent.BlockingQueue;
+
+import javafx.application.Platform;
+import javafx.scene.control.TitledPane;
+
 import java.util.Random;
 
-public class Worker extends Thread {
+public class worker extends Thread {
 
     private BlockingQueue<String[]> customerQueue;
     private ParcelCollection parcelCollection;
@@ -12,13 +16,18 @@ public class Worker extends Thread {
     private int totalParcelProceed;
     private int processingSpeed = 500; // Default processing time in milliseconds
     private Random random = new Random();
+    private TitledPane titledPane; // Add this field
+    private ParcelController parcelController;
+    private String[] currentCustomerData;
 
-    public Worker(int workerId, BlockingQueue<String[]> customerQueue, ParcelCollection parcelCollection) {
+    // Modify the constructor to accept ParcelController reference
+    public worker(int workerId, BlockingQueue<String[]> customerQueue, ParcelCollection parcelCollection, ParcelController parcelController) {
         this.workerId = workerId;
         this.customerQueue = customerQueue;
         this.parcelCollection = parcelCollection;
         this.totalEarning = 0.0;
         this.totalParcelProceed = 0;
+        this.parcelController = parcelController; // Initialize ParcelController
     }
 
     // Synchronized method to change processing speed (if needed)
@@ -31,10 +40,15 @@ public class Worker extends Thread {
         while (!Thread.interrupted()) {
             try {
                 String[] customerData = customerQueue.take();
+                setCurrentCustomerData(customerData); // Update current customer data
                 Thread.sleep(processingSpeed);
 
                 String parcelId = customerData[2];
                 Parcel parcel = parcelCollection.getParcel(parcelId);
+                
+             // Update UI with current processing customer data
+                Platform.runLater(() -> parcelController.updateCurrentParcelLabel(customerData));
+
 
                 if (parcel != null) {
                     // Process the parcel and calculate the fee
@@ -70,4 +84,14 @@ public class Worker extends Thread {
             }
         }
     }
+    
+    public synchronized double getTotalEarnings() {
+        return totalEarning;
+    }
+    
+    // Add a method to update the current processing customer data
+    public synchronized void setCurrentCustomerData(String[] customerData) {
+        this.currentCustomerData = customerData;
+    }
+
 }
