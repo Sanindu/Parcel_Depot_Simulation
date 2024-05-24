@@ -24,21 +24,16 @@ public class Main {
             parcelCollection.addParcel(parcel);
         }
 
-        // Create multiple worker threads (e.g., 2 workers)
-        int numWorkers = 2;
-        worker[] workers = new worker[numWorkers]; // Use 'Worker', not 'worker'
-        for (int i = 0; i < numWorkers; i++) {
-            workers[i] = new worker(i + 1, customerQueue, parcelCollection);
-            workers[i].start();
-        }
+        // Create and start worker threads (e.g., 2 workers)
+        worker worker1 = new worker(1, customerQueue, parcelCollection);
+        worker worker2 = new worker(2, customerQueue, parcelCollection);
+        worker1.start();
+        worker2.start();
 
-        // Add customers to the queue 
+        // Add customers to the queue (you'll need to read this from your customer data file)
         List<String[]> customerData = parcelCollection.readCustomerDataFromFile("CustomerData.txt");
         for (String[] customer : customerData) {
-            customerQueue.add(customer);
-        }
-
-        // You might want to add a way to gracefully stop the worker threads here.
-        // (For example, using Thread.interrupt() after a certain condition is met)
+            customerQueue.add(customer); 
+        }        
     }
 }
