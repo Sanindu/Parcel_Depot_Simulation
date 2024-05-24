@@ -26,15 +26,9 @@ public class Main {
 
         // Create multiple worker threads (e.g., 2 workers)
         int numWorkers = 2;
-<<<<<<< Updated upstream
         worker[] workers = new worker[numWorkers]; // Use 'Worker', not 'worker'
         for (int i = 0; i < numWorkers; i++) {
             workers[i] = new worker(i + 1, customerQueue, parcelCollection);
-=======
-        Worker[] workers = new Worker[numWorkers]; // Use 'Worker', not 'worker'
-        for (int i = 0; i < numWorkers; i++) {
-            workers[i] = new Worker(i + 1, customerQueue, parcelCollection);
->>>>>>> Stashed changes
             workers[i].start();
         }
 
