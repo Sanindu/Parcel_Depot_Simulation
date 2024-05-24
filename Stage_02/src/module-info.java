@@ -1,9 +1,11 @@
-module Stage_02 {
+module HelloWorld {
 	requires javafx.controls;
 	requires javafx.fxml;
 	
 
 	
-	opens application to javafx.graphics, javafx.fxml;
+	opens application to javafx.base, javafx.fxml;
+	
+	exports application;
 	
 }
