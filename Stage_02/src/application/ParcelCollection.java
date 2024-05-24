@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 
+
+
 public class ParcelCollection {
     private Map<String, Parcel> parcels;
     private Queue<String[]> customerQueue;
@@ -162,4 +164,66 @@ public class ParcelCollection {
             return Collections.emptyList();
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    public void start() {
+        System.out.println("Parcel collection process started.");
+        this.parcels.clear();
+        this.customerQueue.clear();
+        this.combinedDataList.clear();
+    }
+
+    public void stop() {
+        System.out.println("Parcel collection process stopped.");
+    }
+
+    public double getTotalEarnings() {
+        double totalEarnings = 0.0;
+        for (Parcel parcel : parcels.values()) {
+            totalEarnings += parcel.parcelFee(
+                parcel.getLength(),
+                parcel.getWidth(),
+                parcel.getHeight(),
+                parcel.getWeight(),
+                parcel.getNoOfDays()
+            );
+        }
+        return totalEarnings;
+    }
+
+    public double getTotalParcelProceeds() {
+        double totalProceeds = 0.0;
+        for (Parcel parcel : parcels.values()) {
+            totalProceeds += parcel.parcelFee(
+                parcel.getLength(),
+                parcel.getWidth(),
+                parcel.getHeight(),
+                parcel.getWeight(),
+                parcel.getNoOfDays()
+            );
+        }
+        return totalProceeds;
+    }
+
+    public void addNewCustomer(Customer customer) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(customerFilePath, true))) { // Use customerFilePath
+            String customerData = customer.getName() + "\t" +
+                                  customer.getAddress() + "\t" +
+                                  customer.getPhoneNumber() + "\t" +
+                                  customer.getEmail();
+            writer.write(customerData);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error writing to customer data file: " + e.getMessage());
+        }
+        
+      
+        
+    }
+    
+
+   
+}
+>>>>>>> Stashed changes
