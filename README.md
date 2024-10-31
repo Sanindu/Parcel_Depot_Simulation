@@ -3,7 +3,7 @@
 
 # Parcel Depot Simulation
 
-This Java-based project simulates a parcel collection system, where customers collect parcels from a depot. Developed as a collaborative assignment for the *Software Engineering* module, the application integrates concepts of **Object-Oriented Programming (OOP)**, **Test-Driven Development (TDD)**, **Multithreading**, and **Design Patterns**.
+This Java-based project simulates a parcel collection system, where customers collect parcels from a depot. Developed as a collaborative project, the application integrates concepts of **Object-Oriented Programming (OOP)**, **Test-Driven Development (TDD)**, **Multithreading**, and **Design Patterns**.
 
 ## Project Overview
 
