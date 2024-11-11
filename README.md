@@ -7,6 +7,8 @@ This Java-based project simulates a parcel collection system, where customers co
 
 ## Project Overview
 
+![](https://github.com/Sanindu/Parcel_Depot_Simulation/blob/main/depot.gif)
+
 The system processes a queue of customers collecting parcels from a depot, calculating collection fees based on each parcel's attributes—dimensions, weight, and days in storage. Stage 1 involved setting up the core functionalities and unit tests, while Stage 2 extended the application with a graphical user interface (GUI) and added concurrent processing capabilities.
 
 ## Features
